@@ -1,0 +1,16 @@
+.ipynb_checkpoints
+._*
+
+*.pdf
+*.jpg
+*.jpeg
+*.png
+
+*.csv
+*.tsv
+*.h5ad
+*.txt
+*.fastq
+*.fasta
+*.gz
+*.zip
