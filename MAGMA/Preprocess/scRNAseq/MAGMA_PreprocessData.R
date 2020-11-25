@@ -1,6 +1,6 @@
 ##### preprocess scRNAseq data for MAGMA #####
 # author: Juliska E Boer
-# date: 04 Nov 2020
+# date: 25 Nov 2020
 
 #load packages
 setwd("E:/")
@@ -11,50 +11,50 @@ library(limma)
 library(stats)
 library(tibble)
 
-source("scripts/GitHub/MAGMA/Preprocess/scRNAseq/MAGMA_PreprocessFunct.R")
+source("GitHub/MAGMA/Preprocess/scRNAseq/MAGMA_PreprocessFunct.R")
 
 #read in files holding 1:1 mouse orthologs
 load("data/input/mm2hs.RData")
 
 #read in Seurat objects for selection of informative genes using ANOVA
-load("data/output/merge_adult/Embryo_Scanpy_Seurat_obj.RData")
+load("data/output/DevelopmentalHb/Embryo_Scanpy_Seurat_obj.RData")
 stuber <- readRDS("data/input/Habenula_neuron_Seurat_object.rds")
-load("data/output/merge_adult/Wallace_Seurat_obj.RData")
-load("data/output/GWAS/TabulaMuris_Seurat_object.RData")
-load("data/output/merge_adult/Merged_DevHB_H_W.RData")
-load("data/output/GWAS/DevHypothalamus-samp_obj.RData")
-load("data/output/GWAS/DevAdMouse-LaManno2016_obj.RData")
+load("data/output/ExternalDatasets/Wallace_Seurat_obj.RData")
+load("data/output/ExternalDatasets/TabulaMuris_Seurat_object.RData")
+load("data/output/ExternalDatasets/Merged_DevHB_H_W.RData")
+load("data/output/ExternalDatasets/DevHypothalamus-samp_obj.RData")
+load("data/output/ExternalDatasets/DevAdMouse-LaManno2016_obj.RData")
 
 #preprocess data into two files, one for each protocol
 
 #read in average expression data
 #developmental Hb
-mmugenes <- data.frame(mm.symbol=fread("data/output/GWAS/Jun2020_GWAS_embryo.csv", header=T)[[1]], stringsAsFactors = F)
-mean <- read.table("data/output/GWAS/Jun2020_GWAS_embryo.csv", header=TRUE, sep=" ", dec=".", row.names=1)
+mmugenes <- data.frame(mm.symbol=fread("data/output/MAGMA/Jun2020_GWAS_embryo.csv", header=T)[[1]], stringsAsFactors = F)
+mean <- read.table("data/output/MAGMA/Jun2020_GWAS_embryo.csv", header=TRUE, sep=" ", dec=".", row.names=1)
 object <- final.embryo
 #Hashikawa, et al (2020)
-mmugenes <- data.frame(mm.symbol=fread("data/output/GWAS/Jun2020_GWAS_stuber.csv", header=T)[[1]], stringsAsFactors = F)
-mean <- read.table("data/output/GWAS/Jun2020_GWAS_stuber.csv", header=TRUE, sep=" ", dec=".", row.names=1)
+mmugenes <- data.frame(mm.symbol=fread("data/output/MAGMA/Jun2020_GWAS_stuber.csv", header=T)[[1]], stringsAsFactors = F)
+mean <- read.table("data/output/MAGMA/Jun2020_GWAS_stuber.csv", header=TRUE, sep=" ", dec=".", row.names=1)
 object <- stuber
 #Wallace, et al (2020)
-mmugenes <- data.frame(mm.symbol=fread("data/output/GWAS/Jun2020_GWAS_wallace.csv", header=T)[[1]], stringsAsFactors = F)
-mean <- read.table("data/output/GWAS/Jun2020_GWAS_wallace.csv", header=TRUE, sep=" ", dec=".", row.names=1)
+mmugenes <- data.frame(mm.symbol=fread("data/output/MAGMA/Jun2020_GWAS_wallace.csv", header=T)[[1]], stringsAsFactors = F)
+mean <- read.table("data/output/MAGMA/Jun2020_GWAS_wallace.csv", header=TRUE, sep=" ", dec=".", row.names=1)
 object <- wallace_hb
 #Tabula Muris, et al (2018)
-mmugenes <- data.frame(mm.symbol=fread("data/output/GWAS/TabulaMuris_avgexpr.csv", header=T)[[1]], stringsAsFactors = F)
-mean <- read.table("data/output/GWAS/TabulaMuris_avgexpr.csv", header=TRUE, sep=" ", dec=".", row.names=1)
+mmugenes <- data.frame(mm.symbol=fread("data/output/MAGMA/TabulaMuris_avgexpr.csv", header=T)[[1]], stringsAsFactors = F)
+mean <- read.table("data/output/MAGMA/TabulaMuris_avgexpr.csv", header=TRUE, sep=" ", dec=".", row.names=1)
 object <- brain_tiss_filtered
 #Merged mouse Hb dataset
-mmugenes <- data.frame(mm.symbol=fread("data/output/merge_adult/Oct2020_GWAS_merged.csv", header=T)[[1]], stringsAsFactors = F)
-mean <- read.table("data/output/merge_adult/Oct2020_GWAS_merged.csv", header=TRUE, sep=" ", dec=".", row.names=1)
+mmugenes <- data.frame(mm.symbol=fread("data/output/MAGMA/Oct2020_GWAS_merged.csv", header=T)[[1]], stringsAsFactors = F)
+mean <- read.table("data/output/MAGMA/Oct2020_GWAS_merged.csv", header=TRUE, sep=" ", dec=".", row.names=1)
 object <- merged
 #Developmental Hypothalamus dataset (2020)
-mmugenes <- data.frame(mm.symbol=fread("data/output/GWAS/Nov2020_GWAS_devhypo-samp.csv", header=T)[[1]], stringsAsFactors = F)
-mean <- read.table("data/output/GWAS/Nov2020_GWAS_devhypo-samp.csv", header=TRUE, sep=" ", dec=".", row.names=1)
+mmugenes <- data.frame(mm.symbol=fread("data/output/MAGMA/Nov2020_GWAS_devhypo-samp.csv", header=T)[[1]], stringsAsFactors = F)
+mean <- read.table("data/output/MAGMA/Nov2020_GWAS_devhypo-samp.csv", header=TRUE, sep=" ", dec=".", row.names=1)
 object <- subhypo
 #Embryonic and Adult Mouse dataset, La Manno (2016)
-mmugenes <- data.frame(mm.symbol=fread("data/output/GWAS/Nov2020_GWAS_lamanno2016.csv", header=T)[[1]], stringsAsFactors = F)
-mean <- read.table("data/output/GWAS/Nov2020_GWAS_lamanno2016.csv", header=TRUE, sep=" ", dec=".", row.names=1)
+mmugenes <- data.frame(mm.symbol=fread("data/output/MAGMA/Nov2020_GWAS_lamanno2016.csv", header=T)[[1]], stringsAsFactors = F)
+mean <- read.table("data/output/MAGMA/Nov2020_GWAS_lamanno2016.csv", header=TRUE, sep=" ", dec=".", row.names=1)
 object <- lamanno
 
 #conversion of mouse genes to 1:1 human orthologs
@@ -81,4 +81,4 @@ exp <- exp[sample(nrow(exp), 11304, replace=FALSE),]
 #write input file for MAGMA analysis using first protocol by Nathan Skene
 write.table(exp, "data/input/Nov2020_GWAS_TabulaM-samp_ANOVA.txt", quote=F, row.names=F, sep="\t") #CHANGE FILE NAME TO DATASET
 #write input file for MAGMA analysis using second protocol by Kyoko Watanabe
-#write.table(exp, "data/input/Aug2020_GWAS_DevHb_AVG.txt", quote=F, row.names=F, sep="\t") #CHANGE FILE NAME TO DATASET
+#write.table(exp, "data/input/Nov2020_GWAS_DevHb_AVG.txt", quote=F, row.names=F, sep="\t") #CHANGE FILE NAME TO DATASET

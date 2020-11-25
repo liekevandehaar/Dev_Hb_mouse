@@ -1,6 +1,6 @@
 ##### plotting time point distribution in each cluster for the Kim et al 2020 and LaManno et al 2016 datasets #####
 # author: Juliska E Boer
-# date: 13 Nov 2020
+# date: 25 Nov 2020
 
 #load packages
 setwd("E:/")
@@ -37,7 +37,7 @@ ggplot(hypo_ages, aes(y=timepoint, x=cluster)) + geom_point(stat="identity", pos
         strip.text = element_text(face="bold", size=14),
         legend.text = element_text(size=12, color="black"),
         legend.title = element_text(size=13, color="black")) + xlab("") + ylab("") + scale_y_discrete(limits = rev(positions)) + #use rev() when E10 at top
-  ggsave("figures/DevHypo_Sampling-E10.pdf")
+  ggsave("figures/ExternalDatasets/DevHypo_Sampling-E10.pdf")
 
 #create LaManno et al 2016 dataframe
 lamanno_ages <- data.frame(c("DA.SNC", "DA.VTA1", "DA.VTA2", "DA.VTA3", "DA.VTA4", rep("mDA0", 5), rep("mDA1", 5), rep("mDA2", 4), rep("mEndo", 6), 
@@ -85,4 +85,4 @@ ggplot(lamanno_ages, aes(y=timepoint, x=cluster)) + geom_point(stat="identity", 
         strip.text = element_text(face="bold", size=14),
         legend.text = element_text(size=12, color="black"),
         legend.title = element_text(size=13, color="black")) + xlab("") + ylab("") + scale_y_discrete(limits = positions) + #use rev() when E10 at top
-  ggsave("figures/LaManno_Sampling-adult.pdf")
+  ggsave("figures/ExternalDatasets/LaManno_Sampling-adult.pdf")

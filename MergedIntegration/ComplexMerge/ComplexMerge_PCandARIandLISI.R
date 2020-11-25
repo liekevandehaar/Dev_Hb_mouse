@@ -1,6 +1,6 @@
 ##### batch effect correction for complex merge using Seurat v3 #####
 # author: Juliska E Boer
-# date: 29 Sep 2020
+# date: 25 Nov 2020
 
 #load packages
 setwd("E:/")
@@ -12,19 +12,19 @@ library(plyr)
 
 #read the data
 #Seurat object of developmental Hb dataset for PC validation
-load("data/output/merge_adult/Embryo_Scanpy_Seurat_obj.RData")
+load("data/output/DevelopmentalHb/Embryo_Scanpy_Seurat_obj.RData")
 hb_pc <- WhichCells(final.embryo, idents=c("12", "13"))
 #Seurat object after Seurat v3 batch effect correction and downstream clustering in Seurat
-load("data/output/merge_adult/Merged_DevHB_H_W.RData")
+load("data/output/MergedIntegration/ComplexMerge/Merged_DevHB_H_W.RData")
 #meta data and UMAP coordinates after BBKNN batch effect correction and downstream clustering in SCANPY
-meta_bbknn <- read.csv("data/output/merge_adult/BatchTest_BBKNN_metadata.csv", header=TRUE, row.names = 1, sep=",", dec=".")
-umap_bbknn <- read.csv("data/output/merge_adult/BatchTest_BBKNN_umap.csv", header=TRUE, row.names = 1, sep=",", dec=".")
+meta_bbknn <- read.csv("data/output/MergedIntegration/ComplexMerge/BatchTest_BBKNN_metadata.csv", header=TRUE, row.names = 1, sep=",", dec=".")
+umap_bbknn <- read.csv("data/output/MergedIntegration/ComplexMerge/BatchTest_BBKNN_umap.csv", header=TRUE, row.names = 1, sep=",", dec=".")
 #meta data and t-SNE coordinates after ComBat batch effect correction and downstream clustering in SCANPY
-meta_combat <- read.csv("data/output/merge_adult/BatchTest_ComBat_metadata.csv", header=TRUE, row.names = 1, sep=",", dec=".")
-tsne_combat <- read.csv("data/output/merge_adult/BatchTest_ComBat_umap.csv", header=TRUE, row.names = 1, sep=",", dec=".")
+meta_combat <- read.csv("data/output/MergedIntegration/ComplexMerge/BatchTest_ComBat_metadata.csv", header=TRUE, row.names = 1, sep=",", dec=".")
+tsne_combat <- read.csv("data/output/MergedIntegration/ComplexMerge/BatchTest_ComBat_umap.csv", header=TRUE, row.names = 1, sep=",", dec=".")
 #meta data and t-SNE coordinates before batch effect correction. downstream clustering is performed in SCANPY
-meta_raw <- read.csv("data/output/merge_adult/BatchTest_raw_metadata.csv", header=TRUE, row.names = 1, sep=",", dec=".")
-tsne_raw <- read.csv("data/output/merge_adult/BatchTest_raw_umap.csv", header=TRUE, row.names = 1, sep=",", dec=".")
+meta_raw <- read.csv("data/output/MergedIntegration/ComplexMerge/BatchTest_raw_metadata.csv", header=TRUE, row.names = 1, sep=",", dec=".")
+tsne_raw <- read.csv("data/output/MergedIntegration/ComplexMerge/BatchTest_raw_umap.csv", header=TRUE, row.names = 1, sep=",", dec=".")
 colnames(tsne_raw) <- c("tSNE_1", "tSNE_2")
 colnames(umap_bbknn) <- c("UMAP_1", "UMAP_2")
 colnames(tsne_combat) <- c("tSNE_1", "tSNE_2")

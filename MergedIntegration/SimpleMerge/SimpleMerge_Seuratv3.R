@@ -1,6 +1,6 @@
 ##### batch effect correction in simple merge using Seurat v3 #####
 # author: Juliska E Boer
-# date: 03 Nov 2020
+# date: 25 Nov 2020
 
 #load packages
 setwd("E:/")
@@ -8,12 +8,11 @@ library(Seurat)
 library(SeuratDisk)
 
 #load filtered Diencephalon data
-Convert("data/output/merge_diencephalon/Jun2020_merge_diencephalon_filtered_di.h5ad", dest = "h5seurat", overwrite = TRUE)
-dienc <- LoadH5Seurat("data/output/merge_diencephalon/Jun2020_merge_diencephalon_filtered_di.h5seurat")
+Convert("data/output/MergedIntegration/SimpleMerge/Jun2020_merge_diencephalon_filtered_di.h5ad", dest = "h5seurat", overwrite = TRUE)
+dienc <- LoadH5Seurat("data/output/MergedIntegration/SimpleMerge/Jun2020_merge_diencephalon_filtered_di.h5seurat")
 
 #load Developmental Hb data
-
-load("data/output/merge_adult/Embryo_Scanpy_Seurat_obj.RData")
+load("data/output/DevelopmentalHb/Embryo_Scanpy_Seurat_obj.RData")
 
 #perform normalizdation on diencephalon data
 dienc <- NormalizeData(dienc)
@@ -44,9 +43,9 @@ merged <- FindNeighbors(merged)
 merged <- FindClusters(merged, resolution = 0.8)
 
 #save the merged object for validation using ARI and LISI
-save(merged, file="data/output/merge_diencephalon/Diencephalon_Merged_Seuratobject.RData")
+save(merged, file="data/output/MergedIntegration/SimpleMerge/Diencephalon_Merged_Seuratobject.RData")
 
 #export the merged object to SCANPY for plotting
 DefaultAssay(merged) <- "RNA" #we need the uncorrected data matrix for gene plotting
-SaveH5Seurat(merged, filename = "data/output/merge_diencephalon/Diencephalon_MergedSeurat.h5Seurat")
-Convert("data/output/merge_diencephalon/Diencephalon_MergedSeurat.h5Seurat", dest="h5ad")
+SaveH5Seurat(merged, filename = "data/output/MergedIntegration/SimpleMerge/Diencephalon_MergedSeurat.h5Seurat")
+Convert("data/output/MergedIntegration/SimpleMerge/Diencephalon_MergedSeurat.h5Seurat", dest="h5ad")

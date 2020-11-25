@@ -1,6 +1,6 @@
 ##### Seurat object for zebrafish Hb datasets #####
 # author: Juliska E Boer
-# date: 03 Nov 2020
+# date: 25 Nov 2020
 
 #load packages
 setwd("E:/")
@@ -30,7 +30,7 @@ pandey.id <- RenameIdents(object = pandey, "1"="La_Hb01", "2"="La_Hb02", "3"="La
                           "7"="La_Hb07", "8"="La_Hb08", "9"="La_Hb09", "10"="La_Hb10", "11"="La_Hb11", "12"="La_Hb12", "13"="La_Hb13", 
                           "14"="La_Hb14", "15"="La_Hb15", "16"="Olf")
 #save larval zebrafish Hb Seurat object
-save(pandey.id, file="data/output/merge_zebrafish/Pandey_Seurat_obj.RData")
+save(pandey.id, file="data/output/ExternalDatasets/Pandey_Seurat_obj.RData")
 
 #read in adult zebrafish Hb object
 load("data/input/Adult_Hab_NewSeurat.RObj")
@@ -43,4 +43,4 @@ CellsX <- WhichCells(pandey.ad.inter, idents = "x")
 pandey.ad <- subset(pandey.ad.inter, cells = CellsX, invert = TRUE)
 
 #save adult zebrafish Hb Seurat object
-save(pandey.ad, file="data/output/merge_zebrafish/PandeyAdult_Seurat_obj.RData")
+save(pandey.ad, file="data/output/ExternalDatasets/PandeyAdult_Seurat_obj.RData")

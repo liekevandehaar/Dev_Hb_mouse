@@ -1,6 +1,6 @@
 ##### perform validation using ARI and LISI for batch effect correction in simple merge #####
 # author: Juliska E Boer
-# date: 03 Nov 2020
+# date: 25 Nov 2020
 
 #load packages
 setwd("E:/")
@@ -12,19 +12,19 @@ library(plyr)
 
 #read the data
 #Seurat object after Seurat v3 batch effect correction and downstream clustering in SCANPY
-load("data/output/merge_diencephalon/Diencephalon_Merged_Seuratobject.RData")
+load("data/output/MergedIntegration/SimpleMerge/Diencephalon_Merged_Seuratobject.RData")
 #meta data and UMAP coordinates after BBKNN batch effect correction and downstream clustering in SCANPY
-meta_bbknn <- read.csv("data/output/merge_diencephalon/BatchTest_BBKNN_metadata.csv", header=TRUE, row.names = 1, sep=",", dec=".")
-umap_bbknn <- read.csv("data/output/merge_diencephalon/BatchTest_BBKNN_umap.csv", header=TRUE, row.names = 1, sep=",", dec=".")
+meta_bbknn <- read.csv("data/output/MergedIntegration/SimpleMerge/BatchTest_BBKNN_metadata.csv", header=TRUE, row.names = 1, sep=",", dec=".")
+umap_bbknn <- read.csv("data/output/MergedIntegration/SimpleMerge/BatchTest_BBKNN_umap.csv", header=TRUE, row.names = 1, sep=",", dec=".")
 #meta data and UMAP coordinates after ComBat batch effect correction and downstream clustering in SCANPY
-meta_combat <- read.csv("data/output/merge_diencephalon/BatchTest_ComBat_metadata.csv", header=TRUE, row.names = 1, sep=",", dec=".")
-umap_combat <- read.csv("data/output/merge_diencephalon/BatchTest_ComBat_umap.csv", header=TRUE, row.names = 1, sep=",", dec=".")
+meta_combat <- read.csv("data/output/MergedIntegration/SimpleMerge/BatchTest_ComBat_metadata.csv", header=TRUE, row.names = 1, sep=",", dec=".")
+umap_combat <- read.csv("data/output/MergedIntegration/SimpleMerge/BatchTest_ComBat_umap.csv", header=TRUE, row.names = 1, sep=",", dec=".")
 #meta data and UMAP coordinates after scGEN batch effect correction and downstream clustering in SCANPY
-meta_scgen <- read.csv("data/output/merge_diencephalon/BatchTest_scgen_metadata.csv", header=TRUE, row.names = 1, sep=",", dec=".")
-umap_scgen <- read.csv("data/output/merge_diencephalon/BatchTest_scgen_umap.csv", header=TRUE, row.names = 1, sep=",", dec=".")
+meta_scgen <- read.csv("data/output/MergedIntegration/SimpleMerge/BatchTest_scgen_metadata.csv", header=TRUE, row.names = 1, sep=",", dec=".")
+umap_scgen <- read.csv("data/output/MergedIntegration/SimpleMerge/BatchTest_scgen_umap.csv", header=TRUE, row.names = 1, sep=",", dec=".")
 #meta data and UMAP coordinates before batch effect correction. downstream clustering is performed in SCANPY
-meta_raw <- read.csv("data/output/merge_diencephalon/BatchTest_raw_metadata.csv", header=TRUE, row.names = 1, sep=",", dec=".")
-umap_raw <- read.csv("data/output/merge_diencephalon/BatchTest_raw_umap.csv", header=TRUE, row.names = 1, sep=",", dec=".")
+meta_raw <- read.csv("data/output/MergedIntegration/SimpleMerge/BatchTest_raw_metadata.csv", header=TRUE, row.names = 1, sep=",", dec=".")
+umap_raw <- read.csv("data/output/MergedIntegration/SimpleMerge/BatchTest_raw_umap.csv", header=TRUE, row.names = 1, sep=",", dec=".")
 colnames(umap_raw) <- c("UMAP_1", "UMAP_2")
 colnames(umap_bbknn) <- c("UMAP_1", "UMAP_2")
 colnames(umap_combat) <- c("UMAP_1", "UMAP_2")

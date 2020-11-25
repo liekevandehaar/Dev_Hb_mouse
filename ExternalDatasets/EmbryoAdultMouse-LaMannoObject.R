@@ -1,13 +1,13 @@
 ##### Seurat object for developmental/adult (dopamine) mouse dataset from La Manno/Linnarsson 2016 #####
 # author: Juliska E Boer
-# date: 12 Nov 2020
+# date: 25 Nov 2020
 
 #load packages
 setwd("E:/")
 library(Seurat)
 
 #adult file
-adultDA_all <- read.csv("data/GSE76381_MouseAdultDAMoleculeCounts.cef.txt", stringsAsFactors=FALSE)
+adultDA_all <- read.csv("data/input/GSE76381_MouseAdultDAMoleculeCounts.cef.txt", stringsAsFactors=FALSE)
 
 #create adult metadata
 adultDA_meta <- adultDA_all[2:3,2:dim(adultDA_all)[2]]
@@ -26,7 +26,7 @@ mouse_ad <- CreateSeuratObject(adultDA_count, assay = "RNA", meta.data = adultDA
 mouse_ad@active.ident <- mouse_ad@meta.data$celltype
 
 #embryonic file
-embryo_all <- read.csv("data/GSE76381_MouseEmbryoMoleculeCounts.cef.txt", stringsAsFactors=FALSE, sep="\t")
+embryo_all <- read.csv("data/input/GSE76381_MouseEmbryoMoleculeCounts.cef.txt", stringsAsFactors=FALSE, sep="\t")
 
 #create embryo metadata
 embryo_meta <- embryo_all[2:4,2:dim(embryo_all)[2]]
@@ -55,7 +55,9 @@ lamanno <- ScaleData(lamanno)
 Unk <- WhichCells(lamanno, idents = "mUnk")
 lamanno <- subset(lamanno, cells = Unk, invert = TRUE)
 
+#export the average expression per cluster for MAGMA analysis
 lamanno_avg <- AverageExpression(lamanno, assays = "RNA")[[1]]
-write.table(lamanno_avg, file="data/output/GWAS/Nov2020_GWAS_lamanno2016.csv")
+write.table(lamanno_avg, file="data/output/MAGMA/Nov2020_GWAS_lamanno2016.csv")
 
-save(lamanno, file="data/output/GWAS/DevAdMouse-LaManno2016_obj.RData")
+#save the Seurat object
+save(lamanno, file="data/output/ExternalDatasets/DevAdMouse-LaManno2016_obj.RData")

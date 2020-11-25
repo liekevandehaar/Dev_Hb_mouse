@@ -1,6 +1,6 @@
 ##### plotting time point distribution in each cluster for the Kim et al 2020 and LaManno et al 2016 datasets #####
 # author: Juliska E Boer
-# date: 13 Nov 2020
+# date: 25 Nov 2020
 
 #load packages
 setwd("E:/")
@@ -37,4 +37,4 @@ ggplot(hb_ages, aes(y=timepoint, x=cluster)) + geom_point(stat="identity", posit
         strip.text = element_text(face="bold", size=14),
         legend.text = element_text(size=12, color="black"),
         legend.title = element_text(size=13, color="black")) + xlab("") + ylab("") + scale_y_discrete(limits = positions) + #use rev() when E10 at top
-  ggsave("figures/DevHb_Sampling-adult.pdf")
+  ggsave("figures/DevelopmentalHb/DevHb_Sampling-adult.pdf")

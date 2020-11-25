@@ -1,12 +1,13 @@
-## Analysis of Developmental habenula dataset ##
+## Analysis of Developmental mouse habenula dataset ##
 
-This is a github repository that holds all scripts used for the following thesis:
+This is a repository that holds all scripts for the manuscript:
 
-*Comparing apples to oranges: an integrative analysis of multiple single-cell RNA-sequencing 
- datasets to study the developing mouse habenula* by **Juliska E Boer**.
+*Transcriptomic analysis of the developing mouse habenula* by **Lieke L. van de Haar, Juliska E. Boer, Thomas E. Sieburgh, Roland van Dijk, Youri Adolfs, Christiaan M. van der Meer, Onur Basak and R. Jeroen Pasterkamp** (unpublished).
 
-The scripts are ordered by the performed analysis. The order of execution can be read in 
-Materials and Methods section in said thesis.
+The scripts are ordered by performed analysis. The order of execution can be read in 
+Materials and Methods section in said manuscript.
+
+----------
 
 #### External scRNAseq datasets used in this study: ####
 
@@ -16,6 +17,10 @@ Materials and Methods section in said thesis.
 - *Larval zebrafish habenula dataset* - Pandey S, Shekhar K, Regev A, Schier AF. Comprehensive Identification and Spatial Mapping of Habenular Neuronal Types Using Single-Cell RNA-Seq. Curr Biol. 28(7): 1052‐1065.e7 (2018). doi: [https://doi.org/10.1016/j.cub.2018.02.040](https://doi.org/10.1016/j.cub.2018.02.040)
 - *Adult zebrafish habenula dataset* - Pandey S, Shekhar K, Regev A, Schier AF. Comprehensive Identification and Spatial Mapping of Habenular Neuronal Types Using Single-Cell RNA-Seq. Curr Biol. 28(7): 1052‐1065.e7 (2018). doi: [https://doi.org/10.1016/j.cub.2018.02.040](https://doi.org/10.1016/j.cub.2018.02.040)
 - *Adult mouse brain tissue dataset* - The Tabula Muris Consortium. Single-cell transcriptomics of 20 mouse organs creates a Tabula Muris. Nature 562: 367-372 (2018). doi: [https://doi.org/10.1038/s41586-018-0590-4](https://doi.org/10.1038/s41586-018-0590-4)
+- *Developmental mouse hypothalamus dataset* - Kim DW, Washington PW, Wang ZQ, Hao Lin S, Sun C, Ismail BT, et al. The cellular and molecular landscape of hypothalamic patterning and differentiation from embryonic to late postnatal development. Nat Commun 11: 4360 (2020). doi: [https://doi.org/10.1038/s41467-020-18231-z](https://doi.org/10.1038/s41467-020-18231-z)
+- *Developmental and adult mouse midbrain dataset* - La Manno G, Gyllborg D, Codeluppi S, Nishimura K, Salto C, Zeisel A, et al. Molecular Diversity of Midbrain Development in Mouse, Human, and Stem Cells. Cell 167(2): 566-580 (2016). doi: [https://doi.org/10.1016/j.cell.2016.09.027](https://doi.org/10.1016/j.cell.2016.09.027)
+
+----------
 
 #### GWAS summary statistics used in this study: ####
 
@@ -27,5 +32,9 @@ Materials and Methods section in said thesis.
 
 
 
+----------
+
+
+Correspondance, requests or questions can be addressed to: xxx
 
 ***Juliska E Boer, Lieke L van de Haar (2020)***

@@ -1,6 +1,6 @@
 ##### rank-order correlations between two performed MAGMA protocols #####
 # author: Juliska E Boer
-# date: 04 Nov 2020
+# date: 25 Nov 2020
 
 #load packages
 setwd("E:/")
@@ -8,23 +8,23 @@ library(dplyr)
 library(ggplot2)
 
 #read in function to perform rank-order correlations
-source("MAGMA_RankOrderFunct.R")
+source("GitHub/MAGMA/Plots/MAGMA_RankOrderFunct.R")
 
 #calculate and plot rank-order correlations between two performed protocols per GWAS tested
 
 #Major Depressive Disorder (MDD)
 #read in results from each protocol for each dataset (excluding merged mouse Hb dataset)
-sMDD_kyoko <- read.table("data/output/GWAS/MDD2-18/Jul2020_GWAS_MDD_stuber_AVG.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
-sMDD_skene <- read.table("data/output/GWAS/MDD2-18/Jul2020_GWAS_MDD_ANOVAstuber.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
+sMDD_kyoko <- read.table("data/output/MAGMA/MDD2-18/Jul2020_GWAS_MDD_stuber_AVG.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
+sMDD_skene <- read.table("data/output/MAGMA/MDD2-18/Jul2020_GWAS_MDD_ANOVAstuber.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
 
-wMDD_kyoko <- read.table("data/output/GWAS/MDD2-18/Jul2020_GWAS_MDD_wallace_AVG.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
-wMDD_skene <- read.table("data/output/GWAS/MDD2-18/Jul2020_GWAS_MDD_ANOVAwallace.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
+wMDD_kyoko <- read.table("data/output/MAGMA/MDD2-18/Jul2020_GWAS_MDD_wallace_AVG.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
+wMDD_skene <- read.table("data/output/MAGMA/MDD2-18/Jul2020_GWAS_MDD_ANOVAwallace.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
 
-eMDD_kyoko <- read.table("data/output/GWAS/MDD2-18/Jul2020_GWAS_MDD_embryo_AVG.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
-eMDD_skene <- read.table("data/output/GWAS/MDD2-18/Jul2020_GWAS_MDD_ANOVAembryo.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
+eMDD_kyoko <- read.table("data/output/MAGMA/MDD2-18/Jul2020_GWAS_MDD_embryo_AVG.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
+eMDD_skene <- read.table("data/output/MAGMA/MDD2-18/Jul2020_GWAS_MDD_ANOVAembryo.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
 
-tmMDD_kyoko <- read.table("data/output/GWAS/MDD2-18/TabulaMuris_MDD_AVG.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
-tmMDD_skene <- read.table("data/output/GWAS/MDD2-18/TabulaMuris_MDD_ANOVA.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
+tmMDD_kyoko <- read.table("data/output/MAGMA/MDD2-18/TabulaMuris_MDD_AVG.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
+tmMDD_skene <- read.table("data/output/MAGMA/MDD2-18/TabulaMuris_MDD_ANOVA.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
 
 #give correct names
 eMDD_kyoko$Dataset <- rep("Developmental Hb", times=14)
@@ -51,21 +51,21 @@ ggplot(ranks_allMDD, aes(y=Rkyoko, x=Rskene)) + geom_point(aes(colour = Dataset)
   xlab("Protocol 2 (Skene)") + ylab("Protocol 1 (Kyoko)") + annotate(geom="text", x=32, y=22, label=round(rs_allMDD,digits=4),color="black", size=5) +
   theme(axis.text = element_text(size=12), axis.title = element_text(size=14)) + labs(colour = "Dataset") +
   scale_color_manual(values = c("#66c2a5", "#7690ca", "#e78ac3", "#fc8d62")) +
-  ggsave("figures/GWAS/MAGMAmethod_corr_MDD.pdf", height=5, width=7)
+  ggsave("figures/MAGMA/MAGMAmethod_corr_MDD.pdf", height=5, width=7)
 
 #Schizophrenia
 #read in results from each protocol for each dataset (excluding merged mouse Hb dataset)
-sSCZ_kyoko <- read.table("data/output/GWAS/SCZ/Jul2020_GWAS_SCZ_stuber_AVG.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
-sSCZ_skene <- read.table("data/output/GWAS/SCZ/Jul2020_GWAS_SCZ_ANOVAstuber.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
+sSCZ_kyoko <- read.table("data/output/MAGMA/SCZ/Jul2020_GWAS_SCZ_stuber_AVG.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
+sSCZ_skene <- read.table("data/output/MAGMA/SCZ/Jul2020_GWAS_SCZ_ANOVAstuber.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
 
-wSCZ_kyoko <- read.table("data/output/GWAS/SCZ/Jul2020_GWAS_SCZ_wallace_AVG.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
-wSCZ_skene <- read.table("data/output/GWAS/SCZ/Jul2020_GWAS_SCZ_ANOVAwallace.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
+wSCZ_kyoko <- read.table("data/output/MAGMA/SCZ/Jul2020_GWAS_SCZ_wallace_AVG.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
+wSCZ_skene <- read.table("data/output/MAGMA/SCZ/Jul2020_GWAS_SCZ_ANOVAwallace.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
 
-eSCZ_kyoko <- read.table("data/output/GWAS/SCZ/Jul2020_GWAS_SCZ_embryo_AVG.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
-eSCZ_skene <- read.table("data/output/GWAS/SCZ/Jul2020_GWAS_SCZ_ANOVAembryo.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
+eSCZ_kyoko <- read.table("data/output/MAGMA/SCZ/Jul2020_GWAS_SCZ_embryo_AVG.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
+eSCZ_skene <- read.table("data/output/MAGMA/SCZ/Jul2020_GWAS_SCZ_ANOVAembryo.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
 
-tmSCZ_kyoko <- read.table("data/output/GWAS/SCZ/TabulaMuris_SCZ_AVG.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
-tmSCZ_skene <- read.table("data/output/GWAS/SCZ/TabulaMuris_SCZ_ANOVA.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
+tmSCZ_kyoko <- read.table("data/output/MAGMA/SCZ/TabulaMuris_SCZ_AVG.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
+tmSCZ_skene <- read.table("data/output/MAGMA/SCZ/TabulaMuris_SCZ_ANOVA.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
 
 #give correct names
 eSCZ_kyoko$Dataset <- rep("Developmental Hb", times=14)
@@ -92,21 +92,21 @@ ggplot(ranks_allSCZ, aes(y=Rkyoko, x=Rskene)) + geom_point(aes(colour = Dataset)
   xlab("Protocol 2 (Skene)") + ylab("Protocol 1 (Kyoko)") + annotate(geom="text", x=35, y=24, label=round(rs_allSCZ,digits=4),color="black", size=5) +
   theme(axis.text = element_text(size=12), axis.title = element_text(size=14)) + labs(colour = "Dataset") + 
   scale_color_manual(values = c("#66c2a5", "#7690ca", "#e78ac3", "#fc8d62")) +
-  ggsave("figures/GWAS/MAGMAmethod_corr_SCZ.pdf", height=5, width=7)
+  ggsave("figures/MAGMA/MAGMAmethod_corr_SCZ.pdf", height=5, width=7)
 
 #Bipolar disorder
 #read in results from each protocol for each dataset (excluding merged mouse Hb dataset)
-sBIP_kyoko <- read.table("data/output/GWAS/BIP/Jun2020_GWAS_BIP_stuber_AVG.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
-sBIP_skene <- read.table("data/output/GWAS/BIP/Jun2020_GWAS_BIP_ANOVAstuber.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
+sBIP_kyoko <- read.table("data/output/MAGMA/BIP/Jun2020_GWAS_BIP_stuber_AVG.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
+sBIP_skene <- read.table("data/output/MAGMA/BIP/Jun2020_GWAS_BIP_ANOVAstuber.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
 
-wBIP_kyoko <- read.table("data/output/GWAS/BIP/Jun2020_GWAS_BIP_wallace_AVG.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
-wBIP_skene <- read.table("data/output/GWAS/BIP/Jun2020_GWAS_BIP_ANOVAwallace.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
+wBIP_kyoko <- read.table("data/output/MAGMA/BIP/Jun2020_GWAS_BIP_wallace_AVG.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
+wBIP_skene <- read.table("data/output/MAGMA/BIP/Jun2020_GWAS_BIP_ANOVAwallace.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
 
-eBIP_kyoko <- read.table("data/output/GWAS/BIP/Jun2020_GWAS_BIP_embryo_AVG.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
-eBIP_skene <- read.table("data/output/GWAS/BIP/Jun2020_GWAS_BIP_ANOVAembryo.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
+eBIP_kyoko <- read.table("data/output/MAGMA/BIP/Jun2020_GWAS_BIP_embryo_AVG.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
+eBIP_skene <- read.table("data/output/MAGMA/BIP/Jun2020_GWAS_BIP_ANOVAembryo.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
 
-tmBIP_kyoko <- read.table("data/output/GWAS/BIP/TabulaMuris_BIP_AVG.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
-tmBIP_skene <- read.table("data/output/GWAS/BIP/TabulaMuris_BIP_ANOVA.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
+tmBIP_kyoko <- read.table("data/output/MAGMA/BIP/TabulaMuris_BIP_AVG.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
+tmBIP_skene <- read.table("data/output/MAGMA/BIP/TabulaMuris_BIP_ANOVA.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
 
 #give correct names
 eBIP_kyoko$Dataset <- rep("Developmental Hb", times=14)
@@ -133,21 +133,21 @@ ggplot(ranks_allBIP, aes(y=Rkyoko, x=Rskene)) + geom_point(aes(colour = Dataset)
   xlab("Protocol 2 (Skene)") + ylab("Protocol 1 (Kyoko)") + annotate(geom="text", x=40, y=23, label=round(rs_allBIP,digits=4),color="black", size=5) +
   theme(axis.text = element_text(size=12), axis.title = element_text(size=14)) + labs(colour = "Dataset") + 
   scale_color_manual(values = c("#66c2a5", "#7690ca", "#e78ac3", "#fc8d62")) +
-  ggsave("figures/GWAS/MAGMAmethod_corr_BIP.pdf", height=5, width=7)
+  ggsave("figures/MAGMA/MAGMAmethod_corr_BIP.pdf", height=5, width=7)
 
 #Body-Mass Index
 #read in results from each protocol for each dataset (excluding merged mouse Hb dataset)
-sBMI_kyoko <- read.table("data/output/GWAS/BMI/Jun2020_GWAS_BMI_stuber_AVG.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
-sBMI_skene <- read.table("data/output/GWAS/BMI/Jun2020_GWAS_BMI_ANOVAstuber.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
+sBMI_kyoko <- read.table("data/output/MAGMA/BMI/Jun2020_GWAS_BMI_stuber_AVG.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
+sBMI_skene <- read.table("data/output/MAGMA/BMI/Jun2020_GWAS_BMI_ANOVAstuber.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
 
-wBMI_kyoko <- read.table("data/output/GWAS/BMI/Jun2020_GWAS_BMI_wallace_AVG.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
-wBMI_skene <- read.table("data/output/GWAS/BMI/Jun2020_GWAS_BMI_ANOVAwallace.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
+wBMI_kyoko <- read.table("data/output/MAGMA/BMI/Jun2020_GWAS_BMI_wallace_AVG.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
+wBMI_skene <- read.table("data/output/MAGMA/BMI/Jun2020_GWAS_BMI_ANOVAwallace.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
 
-eBMI_kyoko <- read.table("data/output/GWAS/BMI/Jun2020_GWAS_BMI_embryo_AVG.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
-eBMI_skene <- read.table("data/output/GWAS/BMI/Jun2020_GWAS_BMI_ANOVAembryo.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
+eBMI_kyoko <- read.table("data/output/MAGMA/BMI/Jun2020_GWAS_BMI_embryo_AVG.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
+eBMI_skene <- read.table("data/output/MAGMA/BMI/Jun2020_GWAS_BMI_ANOVAembryo.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
 
-tmBMI_kyoko <- read.table("data/output/GWAS/BMI/TabulaMuris_BMI_AVG.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
-tmBMI_skene <- read.table("data/output/GWAS/BMI/TabulaMuris_BMI_ANOVA.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
+tmBMI_kyoko <- read.table("data/output/MAGMA/BMI/TabulaMuris_BMI_AVG.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
+tmBMI_skene <- read.table("data/output/MAGMA/BMI/TabulaMuris_BMI_ANOVA.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
 
 #give correct names
 eBMI_kyoko$Dataset <- rep("Developmental Hb", times=14)
@@ -174,21 +174,21 @@ ggplot(ranks_allBMI, aes(y=Rkyoko, x=Rskene)) + geom_point(aes(colour = Dataset)
   xlab("Protocol 2 (Skene)") + ylab("Protocol 1 (Kyoko)") + annotate(geom="text", x=30, y=23, label=round(rs_allBMI,digits=4),color="black", size=5) +
   theme(axis.text = element_text(size=12), axis.title = element_text(size=14)) + labs(colour = "Dataset") + 
   scale_color_manual(values = c("#66c2a5", "#7690ca", "#e78ac3", "#fc8d62")) +
-  ggsave("figures/GWAS/MAGMAmethod_corr_BMI.pdf", height=5, width=7)
+  ggsave("figures/MAGMA/MAGMAmethod_corr_BMI.pdf", height=5, width=7)
 
 #Height
 #read in results from each protocol for each dataset (excluding merged mouse Hb dataset)
-sHeight_kyoko <- read.table("data/output/GWAS/Height/Jun2020_GWAS_Height_stuber_AVG.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
-sHeight_skene <- read.table("data/output/GWAS/Height/Jun2020_GWAS_Height_ANOVAstuber.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
+sHeight_kyoko <- read.table("data/output/MAGMA/Height/Jun2020_GWAS_Height_stuber_AVG.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
+sHeight_skene <- read.table("data/output/MAGMA/Height/Jun2020_GWAS_Height_ANOVAstuber.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
 
-wHeight_kyoko <- read.table("data/output/GWAS/Height/Jun2020_GWAS_Height_wallace_AVG.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
-wHeight_skene <- read.table("data/output/GWAS/Height/Jun2020_GWAS_Height_ANOVAwallace.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
+wHeight_kyoko <- read.table("data/output/MAGMA/Height/Jun2020_GWAS_Height_wallace_AVG.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
+wHeight_skene <- read.table("data/output/MAGMA/Height/Jun2020_GWAS_Height_ANOVAwallace.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
 
-eHeight_kyoko <- read.table("data/output/GWAS/Height/Jun2020_GWAS_Height_embryo_AVG.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
-eHeight_skene <- read.table("data/output/GWAS/Height/Jun2020_GWAS_Height_ANOVAembryo.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
+eHeight_kyoko <- read.table("data/output/MAGMA/Height/Jun2020_GWAS_Height_embryo_AVG.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
+eHeight_skene <- read.table("data/output/MAGMA/Height/Jun2020_GWAS_Height_ANOVAembryo.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
 
-tmHeight_kyoko <- read.table("data/output/GWAS/Height/TabulaMuris_Height_AVG.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
-tmHeight_skene <- read.table("data/output/GWAS/Height/TabulaMuris_Height_ANOVA.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
+tmHeight_kyoko <- read.table("data/output/MAGMA/Height/TabulaMuris_Height_AVG.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
+tmHeight_skene <- read.table("data/output/MAGMA/Height/TabulaMuris_Height_ANOVA.gsa.out", header=TRUE, quote="\"")[,c(1,7)]
 
 #give correct names
 eHeight_kyoko$Dataset <- rep("Developmental Hb", times=14)
@@ -215,5 +215,4 @@ ggplot(ranks_allHeight, aes(y=Rkyoko, x=Rskene)) + geom_point(aes(colour = Datas
   xlab("Protocol 2 (Skene)") + ylab("Protocol 1 (Kyoko)") + annotate(geom="text", x=41, y=32, label=round(rs_allHeight,digits=4),color="black", size=5) +
   theme(axis.text = element_text(size=12), axis.title = element_text(size=14)) + labs(colour = "Dataset") + 
   scale_color_manual(values = c("#66c2a5", "#7690ca", "#e78ac3", "#fc8d62")) +
-  ggsave("figures/GWAS/MAGMAmethod_corr_Height.pdf", height=5, width=7)
-
+  ggsave("figures/MAGMA/MAGMAmethod_corr_Height.pdf", height=5, width=7)

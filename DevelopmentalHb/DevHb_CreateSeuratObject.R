@@ -1,6 +1,6 @@
 ##### create Seurat object after downstream analysis in SCANPY #####
 # author: Juliska E Boer
-# date: 03 Nov 2020
+# date: 25 Nov 2020
 
 #load packages
 setwd("E:/")
@@ -19,8 +19,8 @@ final.embryo@assays$RNA@scale.data <- as.matrix(batch_expr)
 Idents(final.embryo) <- final.embryo[["louvain"]]
 
 #save Seurat object
-save(final.embryo, file="data/output/merge_adult/Embryo_Scanpy_Seurat_obj.RData")
+save(final.embryo, file="data/output/DevelopmentalHb/Embryo_Scanpy_Seurat_obj.RData")
 
 #save average expression per cluster for MAGMA analysis
 embryo_avg <- AverageExpression(final.embryo, assays = "RNA")[[1]]
-write.table(embryo_avg, file="data/output/GWAS/Jun2020_GWAS_embryo.csv")
+write.table(embryo_avg, file="data/output/MAGMA/Jun2020_GWAS_embryo.csv")
