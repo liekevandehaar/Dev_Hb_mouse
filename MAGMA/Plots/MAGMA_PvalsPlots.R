@@ -215,7 +215,7 @@ gsa_hypo$logP <- -log10(gsa_hypo$P)
 
 #make plot
 ggplot(gsa_hypo, aes(y=logP, x=VARIABLE)) + 
-  geom_bar(position="dodge", stat="identity") +
+  geom_bar(position="dodge", stat="identity", fill="#999999") +
   facet_wrap(~GWAS, nrow=5, scales = "free_y") + geom_hline(yintercept=-log10(0.05/(14*5)), linetype="dashed") +
   xlab("") + ylab("-log10(P)") + theme(axis.text.x = element_text(angle=90, hjust=0.95,vjust=0.2, color="black", size=12),
                                        axis.text.y = element_text(color="black", size=12),
@@ -247,7 +247,7 @@ gsa_hypo$logP <- -log10(gsa_hypo$P)
 
 #make plot
 ggplot(gsa_hypo, aes(y=logP, x=VARIABLE)) + 
-  geom_bar(position="dodge", stat="identity") +
+  geom_bar(position="dodge", stat="identity", fill="#e06666") +
   facet_wrap(~GWAS, nrow=5, scales = "free_y") + geom_hline(yintercept=-log10(0.05/(31*5)), linetype="dashed") +
   xlab("") + ylab("-log10(P)") + theme(axis.text.x = element_text(angle=90, hjust=0.95,vjust=0.2, color="black", size=12),
                                        axis.text.y = element_text(color="black", size=12),
