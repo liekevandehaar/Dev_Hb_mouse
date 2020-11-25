@@ -1,6 +1,6 @@
 ##### plot cell type occupancy over sampling timeline #####
 # author: Juliska E Boer
-# date: 03 Nov 2020
+# date: 25 Nov 2020
 
 #load packages
 library(ggplot2)
@@ -10,7 +10,7 @@ library(dplyr)
 setwd("E:/")
 
 #read in Seurat object holding developmental Hb dataset
-load("data/output/merge_adult/Embryo_Scanpy_Seurat_obj.RData")
+load("data/output/DevelopmentalHb/Embryo_Scanpy_Seurat_obj.RData")
 
 #format data for ggplot (melted format)
 data <- data.frame(row.names = row.names(final.embryo@meta.data),
@@ -56,4 +56,4 @@ ggplot(data_devhb, aes(x=day, y=percentage, fill=cluster)) +
         panel.grid.major = element_blank(), 
         panel.grid.minor = element_blank(),
         axis.line = element_line(colour = "black")) + ylab("Percentage") + xlab("") +
-  ggsave("figures/embryo_Hb/DevHb_celltype_occupancy_tp.pdf", height=4, width=12)
+  ggsave("figures/DevelopmentalHb/DevHb_celltype_occupancy_tp.pdf", height=4, width=12)

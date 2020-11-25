@@ -1,6 +1,6 @@
 ##### batch effect correction in multi time point dataset using Seurat v3 #####
 # author: Juliska E Boer
-# date: 03 Nov 2020
+# date: 25 Nov 2020
 
 #load packages
 setwd("E:/")
@@ -8,7 +8,7 @@ library(Seurat)
 library(SeuratDisk)
 
 #read in raw expression matrix exported from SCANPY
-embryo_raw <- read.table("data/output/embryo_Hb/Apr2020_embryoHb_raw_expr_matrix.csv", 
+embryo_raw <- read.table("data/output/DevelopmentalHb/Apr2020_embryoHb_raw_expr_matrix.csv", 
                          header=TRUE, sep=",", dec=".", row.names=1)
 #create Seurat object using the raw counts
 embryo <- CreateSeuratObject(embryo_raw, project="EmbryoHb", assay="RNA", names.field = 5, names.delim = "_")
@@ -30,8 +30,8 @@ embryo_no_corr <- FindNeighbors(embryo_no_corr)
 embryo_no_corr <- FindClusters(embryo_no_corr, resolution = 0.8)
 TSNEPlot(embryo_no_corr, label=TRUE)
 #export the uncorrected Seurat object to SCANPY for final figure plotting
-SaveH5Seurat(embryo_no_corr, filename = "data/output/embryo_Hb/RawSeurat.h5Seurat")
-Convert("data/output/embryo_Hb/RawSeurat.h5Seurat", dest="h5ad")
+SaveH5Seurat(embryo_no_corr, filename = "data/output/DevelopmentalHb/DevHb_RawSeurat.h5Seurat")
+Convert("data/output/DevelopmentalHb/DevHb_RawSeurat.h5Seurat", dest="h5ad")
 
 #INTEGRATION
 #divide the object into sampling time poin subsets and determine the HVG per object

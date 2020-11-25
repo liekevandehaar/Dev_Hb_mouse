@@ -1,6 +1,6 @@
 ##### classify developmental Hb cells to previously annotated clusters using a RandomForest classifier #####
 # author: Juliska E Boer
-# date: 03 Nov 2020
+# date: 25 Nov 2020
 
 #load packages
 setwd("E:/")
@@ -12,14 +12,14 @@ library(dplyr)
 library(tidyverse)
 
 #load function for plotting confusion matrix
-source("RandomForest_ConfusionMatrix.R")
+source("GitHub/AlternativeIntegration/RandomForest/RandomForest_ConfusionMatrix.R")
 
 #load data
-load("data/output/merge_adult/Embryo_Scanpy_Seurat_obj.RData")
+load("data/output/DevelopmentalHb/Embryo_Scanpy_Seurat_obj.RData")
 stuber <- readRDS("data/input/Habenula_neuron_Seurat_object.rds")
-load("data/output/merge_adult/Wallace_Seurat_obj.RData")
-load("data/output/merge_zebrafish/Pandey_Seurat_obj.RData")
-load("data/output/merge_zebrafish/PandeyAdult_Seurat_obj.RData")
+load("data/output/ExternalDatasets/Wallace_Seurat_obj.RData")
+load("data/output/ExternalDatasets/Pandey_Seurat_obj.RData")
+load("data/output/ExternalDatasets/PandeyAdult_Seurat_obj.RData")
 
 #select for highly variable genes (HVG)
 final.embryo <- FindVariableFeatures(final.embryo)
@@ -29,11 +29,11 @@ pandey.id <- FindVariableFeatures(pandey.id)
 pandey.ad <- FindVariableFeatures(pandey.ad)
 
 #load DEG results
-load("data/output/merge_adult/DEG-final-embryo.RData") #c("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13")
-load("data/output/merge_adult/DEG_Stuber.RData") #c("MHb1", "MHb2", "MHb3", "MHb4", "MHb5", "MHb6", "LHb1", "LHb2", "LHb3", "LHb4", "LHb5", "LHb6")
-load("data/output/merge_adult/DEG-wallace.RData") #c("Ventral2/3(MHb1)", "Ventrolateral(MHb2)", "Lateral(MHb3)", "Dorsal(MHb4)", "Superior(MHb5)", "Oval/Medial(LHb1)", "Marginal(LHb2)", "Lateral(LHb3)", "HBX(LHb4)") c("Oval.Medial.LHb1.", "Marginal.LHb2.", "Lateral.LHb3.", "HBX.LHb4.", "Ventral2.3.MHb1.", "Ventrolateral.MHb2.", "Lateral.MHb3.", "Dorsal.MHb4.", "Superior.MHb5.")
-load("data/output/merge_zebrafish/DEG_pandey.RData") #c("La_Hb01", "La_Hb02", "La_Hb03", "La_Hb04", "La_Hb05", "La_Hb06", "La_Hb07", "La_Hb08", "La_Hb09", "La_Hb10", "La_Hb11", "La_Hb12", "La_Hb13", "La_Hb14", "La_Hb15", "Olf")
-load("data/output/merge_zebrafish/DEG_pandey_adult.RData") #c("Ad_Hb01", "Ad_Hb02A", "Ad_Hb02B", "Ad_Hb04", "Ad_Hb05", "Ad_Hb06", "Ad_Hb08", "Ad_Hb09", "Ad_Hb10", "Ad_Hb11", "Ad_Hb13", "Ad_Hb14", "Ad_VHb01", "Ad_VHb02", "Ad_VHb03", "Ad_VHb04", "Ad_Hb16")
+load("data/output/DevelopmentalHb/DEG-final-embryo.RData") #c("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13")
+load("data/output/ExternalDatasets/DEG_Stuber.RData") #c("MHb1", "MHb2", "MHb3", "MHb4", "MHb5", "MHb6", "LHb1", "LHb2", "LHb3", "LHb4", "LHb5", "LHb6")
+load("data/output/ExternalDatasets/DEG-wallace.RData") #c("Ventral2/3(MHb1)", "Ventrolateral(MHb2)", "Lateral(MHb3)", "Dorsal(MHb4)", "Superior(MHb5)", "Oval/Medial(LHb1)", "Marginal(LHb2)", "Lateral(LHb3)", "HBX(LHb4)") c("Oval.Medial.LHb1.", "Marginal.LHb2.", "Lateral.LHb3.", "HBX.LHb4.", "Ventral2.3.MHb1.", "Ventrolateral.MHb2.", "Lateral.MHb3.", "Dorsal.MHb4.", "Superior.MHb5.")
+load("data/output/ExternalDatasets/DEG_pandey.RData") #c("La_Hb01", "La_Hb02", "La_Hb03", "La_Hb04", "La_Hb05", "La_Hb06", "La_Hb07", "La_Hb08", "La_Hb09", "La_Hb10", "La_Hb11", "La_Hb12", "La_Hb13", "La_Hb14", "La_Hb15", "Olf")
+load("data/output/ExternalDatasets/DEG_pandey_adult.RData") #c("Ad_Hb01", "Ad_Hb02A", "Ad_Hb02B", "Ad_Hb04", "Ad_Hb05", "Ad_Hb06", "Ad_Hb08", "Ad_Hb09", "Ad_Hb10", "Ad_Hb11", "Ad_Hb13", "Ad_Hb14", "Ad_VHb01", "Ad_VHb02", "Ad_VHb03", "Ad_VHb04", "Ad_Hb16")
 
 #set the datasets for RF classification
 #annotated dataset for training the classifier
@@ -43,7 +43,7 @@ Predobject = final.embryo
 
 #if the annotated dataset is a zebrafish dataset, then we need to convert the gene names to 1:1 mouse orthologue genes
 #uncomment this section to do so:
-#load("data/output/merge_zebrafish/dre_mmu_1-1orts.RData")
+#load("data/input/dre_mmu_1-1orts.RData")
 #pandey_df = data.frame(RFobject@assays$RNA@counts)
 
 #pandey_df <- subset(pandey_df, rownames(pandey_df) %in% mart.ort$Gene.name)

@@ -1,6 +1,6 @@
 ##### alternative integration: correlation analysis #####
 # author: Juliska E Boer
-# date: 03 Nov 2020
+# date: 25 Nov 2020
 
 #load packages
 setwd("E:/")
@@ -10,41 +10,41 @@ library(tidyverse)
 library(heatmaply)
 
 #load functions for identifying differentially expressed genes (DEGs) using MAST and for calculating the correlations
-source("Correlation_CalcDEG.R")
-source("Correlation_CalcCorr.R")
+source("GitHub/AlternativeIntegration/Correlation/Correlation_CalcDEG.R")
+source("GitHub/AlternativeIntegration/Correlation/Correlation_CalcCorr.R")
 
 #read in the data
-load("data/output/merge_adult/Embryo_Scanpy_Seurat_obj.RData") #developmental Hb
+load("data/output/DevelopmentalHb/Embryo_Scanpy_Seurat_obj.RData") #developmental Hb
 stuber <- readRDS("data/input/Habenula_neuron_Seurat_object.rds") #adult mouse Hb: Hashikawa, et al (2020)
-load("data/output/merge_adult/Wallace_Seurat_obj.RData") #adult mouse Hb: Wallace, et al (2020)
-load("data/output/merge_zebrafish/Pandey_Seurat_obj.RData") #larval zebrafish Hb: Pandey, et al (2018)
-load("data/output/merge_zebrafish/PandeyAdult_Seurat_obj.RData") #adult zebrafish Hb: Pandey, et al (2018)
+load("data/output/ExternalDatasets/Wallace_Seurat_obj.RData") #adult mouse Hb: Wallace, et al (2020)
+load("data/output/ExternalDatasets/Pandey_Seurat_obj.RData") #larval zebrafish Hb: Pandey, et al (2018)
+load("data/output/ExternalDatasets/PandeyAdult_Seurat_obj.RData") #adult zebrafish Hb: Pandey, et al (2018)
 
 #determine DEGs for each dataset, and save information (this function takes some time)
 DEG.final.embryo <- DE_Gene_Union(final.embryo, levels(final.embryo@active.ident), data.info.col = 1:13)
-save(DEG.final.embryo, file = "data/output/merge_adult/DEG-final-embryo.RData")
+save(DEG.final.embryo, file = "data/output/DevelopmentalHb/DEG-final-embryo.RData")
 
 DE_Gene_Stuber <- DE_Gene_Union(stuber, levels(stuber@active.ident), data.info.col = 1:9)
-save(DE_Gene_Stuber, file = "data/output/merge_adult/DEG_Stuber.RData")
+save(DE_Gene_Stuber, file = "data/output/ExternalDatasets/DEG_Stuber.RData")
 
 DEG.wallace <- DE_Gene_Union(wallace_hb, levels(wallace_hb@active.ident), data.info.col = 1:5)
-save(DEG.wallace, file = "data/output/merge_adult/DEG-wallace.RData")
+save(DEG.wallace, file = "data/output/ExternalDatasets/DEG-wallace.RData")
 
 DEG.pandey <- DE_Gene_Union(pandey.id, levels(pandey.id@active.ident), data.info.col = 1:7)
-save(DEG.pandey, file="data/output/merge_zebrafish/DEG_pandey.RData")
+save(DEG.pandey, file="data/output/ExternalDatasets/DEG_pandey.RData")
 
 DEG.pandey.ad <- DE_Gene_Union(pandey.ad, levels(pandey.ad@active.ident), data.info.col = 1:6)
-save(DEG.pandey.ad, file="data/output/merge_zebrafish/DEG_pandey_adult.RData")
+save(DEG.pandey.ad, file="data/output/ExternalDatasets/DEG_pandey_adult.RData")
 
 #prepare input for correlation function
 #average expression matrices filtered on DEG
 
 #load DEG result (vectors behind the objects are the cluster names, these are used for plotting)
-load("data/output/merge_zebrafish/DEG_pandey_adult.RData") #c("Ad_Hb01", "Ad_Hb02A", "Ad_Hb02B", "Ad_Hb04", "Ad_Hb05", "Ad_Hb06", "Ad_Hb08", "Ad_Hb09", "Ad_Hb10", "Ad_Hb11", "Ad_Hb13", "Ad_Hb14", "Ad_VHb01", "Ad_VHb02", "Ad_VHb03", "Ad_VHb04", "Ad_Hb16")
-load("data/output/merge_zebrafish/DEG_pandey.RData") #c("La_Hb01", "La_Hb02", "La_Hb03", "La_Hb04", "La_Hb05", "La_Hb06", "La_Hb07", "La_Hb08", "La_Hb09", "La_Hb10", "La_Hb11", "La_Hb12", "La_Hb13", "La_Hb14", "La_Hb15", "Olf")
-load("data/output/merge_adult/DEG_Stuber.RData") #c("MHb1", "MHb2", "MHb3", "MHb4", "MHb5", "MHb6", "LHb1", "LHb2", "LHb3", "LHb4", "LHb5", "LHb6")
-load("data/output/merge_adult/DEG-final-embryo.RData") #c("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13")
-load("data/output/merge_adult/DEG-wallace.RData") #c("Ventral 2/3(MHb1)", "Ventrolateral(MHb2)", "Lateral(MHb3)", "Dorsal(MHb4)", "Superior(MHb5)", "Oval/Medial(LHb1)", "Marginal(LHb2)", "Lateral(LHb3)", "HBX(LHb4)")
+load("data/output/ExternalDatasets/DEG_pandey_adult.RData") #c("Ad_Hb01", "Ad_Hb02A", "Ad_Hb02B", "Ad_Hb04", "Ad_Hb05", "Ad_Hb06", "Ad_Hb08", "Ad_Hb09", "Ad_Hb10", "Ad_Hb11", "Ad_Hb13", "Ad_Hb14", "Ad_VHb01", "Ad_VHb02", "Ad_VHb03", "Ad_VHb04", "Ad_Hb16")
+load("data/output/ExternalDatasets/DEG_pandey.RData") #c("La_Hb01", "La_Hb02", "La_Hb03", "La_Hb04", "La_Hb05", "La_Hb06", "La_Hb07", "La_Hb08", "La_Hb09", "La_Hb10", "La_Hb11", "La_Hb12", "La_Hb13", "La_Hb14", "La_Hb15", "Olf")
+load("data/output/ExternalDatasets/DEG_Stuber.RData") #c("MHb1", "MHb2", "MHb3", "MHb4", "MHb5", "MHb6", "LHb1", "LHb2", "LHb3", "LHb4", "LHb5", "LHb6")
+load("data/output/DevelopmentalHb/DEG-final-embryo.RData") #c("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13")
+load("data/output/ExternalDatasets/DEG-wallace.RData") #c("Ventral 2/3(MHb1)", "Ventrolateral(MHb2)", "Lateral(MHb3)", "Dorsal(MHb4)", "Superior(MHb5)", "Oval/Medial(LHb1)", "Marginal(LHb2)", "Lateral(LHb3)", "HBX(LHb4)")
 
 #set the datasets and DEGs you want to correlate
 expr_table1 <- AverageExpression(pandey.ad, assays = "RNA", slot="counts")[[1]]
@@ -54,7 +54,7 @@ DEgenes2 <- DEG.final.embryo$`union_fdr<0.05`
 
 #if dataset #1 is a zebrafish dataset, then we need to convert the gene names to 1:1 mouse orthologue genes
 #uncomment this section to do so:
-load("data/output/merge_zebrafish/dre_mmu_1-1orts.RData")
+load("data/input/dre_mmu_1-1orts.RData")
 expr_table1 <- subset(expr_table1, rownames(expr_table1) %in% mart.ort$Gene.name)
 expr_table1 <- expr_table1 %>% rownames_to_column() %>% left_join(mart.ort, by = c("rowname" = "Gene.name"))
 rownames(expr_table1) <- expr_table1$Mouse.gene.name

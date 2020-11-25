@@ -1,6 +1,6 @@
 ##### batch effect correction for complex merge using Seurat v3 #####
 # author: Juliska E Boer
-# date: 03 Nov 2020
+# date: 25 Nov 2020
 
 #load packages
 setwd("E:/")
@@ -9,9 +9,9 @@ library(ggplot2)
 library(dplyr)
 
 #load data
-load("data/output/merge_adult/Embryo_Scanpy_Seurat_obj.RData") #developmental Hb
+load("data/output/DevelopmentalHb/Embryo_Scanpy_Seurat_obj.RData") #developmental Hb
 stuber <- readRDS("data/input/Habenula_neuron_Seurat_object.rds") #Hashikawa, et al 2020
-load("data/output/merge_adult/Wallace_Seurat_obj.RData") #Wallace, et al 2020
+load("data/output/ExternalDatasets/Wallace_Seurat_obj.RData") #Wallace, et al 2020
 
 #remove mitochondrial genes from both adult mouse Hb datsets
 st_counts <- GetAssayData(stuber, assay = "RNA")
@@ -29,15 +29,15 @@ columns.to.remove <- c("nFeature", "nCount", "n_total_counts", "n_counts_norm", 
 for(i in columns.to.remove) {
   scanpy[[i]] <- NULL
 }
-SeuratDisk::SaveH5Seurat(scanpy, filename = "data/output/merge_adult/BatchTest_Merged_Oct20.h5Seurat")
-SeuratDisk::Convert("data/output/merge_adult/BatchTest_Merged_Oct20.h5Seurat", dest="h5ad")
+SeuratDisk::SaveH5Seurat(scanpy, filename = "data/output/MergedIntegration/ComplexMerge/BatchTest_Merged_Oct20.h5Seurat")
+SeuratDisk::Convert("data/output/MergedIntegration/ComplexMerge/BatchTest_Merged_Oct20.h5Seurat", dest="h5ad")
 
 #export text file holding all earlier identified clusters and cell types
 idents_devhb <- final.embryo@active.ident
 idents_hashi <- st_nomito@active.ident
 idents_wallace <- w_nomito@active.ident
 all_idents <- c(idents_devhb[[1]], idents_hashi[[1]], as.character(idents_wallace[[1]]))
-data.table::fwrite(list(all_idents), file="data/output/merge_adult/BatchTest_identlist_26Oct20.txt")
+data.table::fwrite(list(all_idents), file="data/output/MergedIntegration/ComplexMerge/BatchTest_identlist_26Oct20.txt")
 
 #select highly variable genes for each object
 final.embryo <- FindVariableFeatures(final.embryo, assay="RNA", selection.method="mvp")
@@ -67,12 +67,12 @@ merged <- FindNeighbors(merged)
 merged <- FindClusters(merged, resolution = 0.8)
 
 #save the merged object for validation using ARI and LISI
-save(merged, file="data/output/merge_adult/Merged_DevHB_H_W.RData")
+save(merged, file="data/output/MergedIntegration/ComplexMerge/Merged_DevHB_H_W.RData")
 
 #export the merged object to SCANPY for plotting
-SeuratDisk::SaveH5Seurat(merged, filename = "data/output/merge_adult/Merged4TSNE.h5Seurat")
-SeuratDisk::Convert("data/output/merge_adult/Merged4TSNE.h5Seurat", dest="h5ad")
+SeuratDisk::SaveH5Seurat(merged, filename = "data/output/MergedIntegration/ComplexMerge/Merged4TSNE.h5Seurat")
+SeuratDisk::Convert("data/output/MergedIntegration/ComplexMerge/Merged4TSNE.h5Seurat", dest="h5ad")
 
 #save average expression of the clusters in the merged object for MAGMA analysis
 avg_expr <- AverageExpression(merged, assays="RNA", slot="data")[[1]]
-write.table(avg_expr, file="data/output/merge_adult/Oct2020_GWAS_merged.csv")
+write.table(avg_expr, file="data/output/MAGMA/Oct2020_GWAS_merged.csv")
