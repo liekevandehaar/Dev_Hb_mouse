@@ -2,7 +2,7 @@
 
 This is a repository that holds all scripts for the manuscript:
 
-*Transcriptomic analysis of the developing mouse habenula* by **Lieke L. van de Haar, Juliska E. Boer, Thomas E. Sieburgh, Roland van Dijk, Youri Adolfs, Christiaan M. van der Meer, Onur Basak and R. Jeroen Pasterkamp** (unpublished).
+*Molecular Signatures and Cellular Diversity During Mouse Habenula Development* by **Lieke L. van de Haar, Danai Riga, Juliska E. Boer, Youri Adolfs, Thomas E. Sieburgh, Roland E. van Dijk, Kyoko Watanabe, Nicky C.H. van Kronenburg, Mark H. Broekhoven, Danielle Posthuma, Frank J. Meye, Onur Basak and R. Jeroen Pasterkamp*** (unpublished).
 
 The scripts are ordered by performed analysis. The order of execution can be read in 
 Materials and Methods section in said manuscript.
