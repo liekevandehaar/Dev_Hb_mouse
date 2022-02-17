@@ -4,8 +4,8 @@ This is a repository that holds all scripts for the manuscript:
 
 *Molecular Signatures and Cellular Diversity During Mouse Habenula Development* by **Lieke L. van de Haar, Danai Riga, Juliska E. Boer, Youri Adolfs, Thomas E. Sieburgh, Roland E. van Dijk, Kyoko Watanabe, Nicky C.H. van Kronenburg, Mark H. Broekhoven, Danielle Posthuma, Frank J. Meye, Onur Basak and R. Jeroen Pasterkamp*** (unpublished).
 
-The scripts are ordered by performed analysis. The order of execution can be read in 
-Materials and Methods section in said manuscript.
+The scripts are ordered by performed analysis. The order of execution can be read in Materials and Methods section in said manuscript.
+All data (count matrices and FastQ files) can be accessed through GEO: GSE188712.
 
 ----------
 
