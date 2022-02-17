@@ -37,4 +37,4 @@ All data (count matrices and FastQ files) can be accessed through GEO: GSE188712
 
 Correspondance, requests or questions can be addressed to: R.J.Pasterkamp@umcutrecht & l.l.vandehaar@gmail.com
 
-***Lieke L van de Haar, Juliska E Boer (2020)***
+***Lieke L van de Haar, Juliska E Boer (2022)***
