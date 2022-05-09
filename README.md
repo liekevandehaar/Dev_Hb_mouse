@@ -35,6 +35,6 @@ All data (count matrices and FastQ files) can be accessed through GEO: GSE188712
 ----------
 
 
-Correspondance, requests or questions can be addressed to: R.J.Pasterkamp@umcutrecht 
+Correspondance, requests or questions can be addressed to: R.J.Pasterkamp@umcutrecht.nl
 
 ***Lieke L van de Haar, Juliska E Boer (2022)***
