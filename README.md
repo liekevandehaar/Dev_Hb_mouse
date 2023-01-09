@@ -2,7 +2,8 @@
 
 This is a repository that holds all scripts for the manuscript:
 
-*Molecular signatures and cellular diversity during mouse habenula development. Lieke L. van de Haar, Danai Riga, Juliska E. Boer, Oxana Garritsen, Youri Adolfs, Thomas E. Sieburgh, Roland E. van Dijk, Kyoko Watanabe, Nicky C.H. van Kronenburg, Mark H. Broekhoven, Danielle Posthuma, Frank J. Meye, Onur Basak, R. Jeroen Pasterkamp. Cell Reports, Volume 40, Issue 1, 2022, 111029, ISSN 2211-1247, https://doi.org/10.1016/j.celrep.2022.111029.
+Molecular signatures and cellular diversity during mouse habenula development. 
+Lieke L. van de Haar, Danai Riga, Juliska E. Boer, Oxana Garritsen, Youri Adolfs, Thomas E. Sieburgh, Roland E. van Dijk, Kyoko Watanabe, Nicky C.H. van Kronenburg, Mark H. Broekhoven, Danielle Posthuma, Frank J. Meye, Onur Basak, R. Jeroen Pasterkamp. Cell Reports, Volume 40, Issue 1, 2022, 111029, ISSN 2211-1247, https://doi.org/10.1016/j.celrep.2022.111029.
 
 The scripts are ordered by performed analysis. The order of execution can be read in Materials and Methods section in said manuscript.
 All data (count matrices and FastQ files) can be accessed through GEO: GSE188712.
